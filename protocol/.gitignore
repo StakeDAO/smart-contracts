@@ -1,0 +1,12 @@
+__pycache__
+.history
+.secret
+.infuraID
+.hypothesis/
+build/
+reports/
+node_modules
+bin/
+mnemonic.txt
+merkle
+yarn-error.log

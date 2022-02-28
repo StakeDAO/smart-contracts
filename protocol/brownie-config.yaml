@@ -1,0 +1,42 @@
+# use Ganache's forked mainnet mode as the default network
+networks:
+  default: mainnet-fork
+  development:
+    cmd_settings:
+      accounts: 100
+  mainnet-fork:
+    host: https://mainnet.infura.io/v3/<your-infura-api-key>
+    cmd_settings:
+      unlock: 0xeAa9fFaf11cFADde18645875151fBF85ed6C8C98
+  mainnet:
+    host: https://mainnet.infura.io/v3/<your-infura-api-key>
+    gas_limit: auto
+    gas_price: auto
+    reverting_tx_gas_limit: false
+    cmd_settings:
+      unlock: 0xeAa9fFaf11cFADde18645875151fBF85ed6C8C98
+
+# automatically fetch contract sources from Etherscan
+autofetch_sources: True
+
+# require OpenZepplin Contracts
+dependencies:
+  - OpenZeppelin/openzeppelin-contracts@2.5.1
+  - OpenZeppelin/openzeppelin-contracts@3.1.0
+  - 0xsequence/multi-token-standard@0.8.13
+
+# path remapping to support OpenZepplin imports with NPM-style path
+compiler:
+  solc:
+    remappings:
+      - "@openzeppelinV2=OpenZeppelin/openzeppelin-contracts@2.5.1"
+      - "@openzeppelinV3=OpenZeppelin/openzeppelin-contracts@3.1.0"
+      - "@multi-token-standard=0xsequence/multi-token-standard@0.8.13"
+
+reports:
+  exclude_paths:
+    - contracts/test/Token.sol
+  exclude_contracts:
+    - SafeMath
+
+dev_deployment_artifacts: True
