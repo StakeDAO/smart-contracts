@@ -66,7 +66,7 @@ contract StrategyBtcCurve {
     address(0xC2d95EEF97Ec6C17551d45e77B590dc1F9117C67);
 
   address public gauge =
-    address(0x19793B454D3AfC7b454F206Ffe95aDE26cA6912c);
+    address(0x8D9649e50A0d1da8E939f800fB926cdE8f18B47D);
 
   address public paraswapProxy =
     address(0xCD52384e2A96F6E91e4e420de2F9a8C0f1FFB449);
