@@ -30,5 +30,7 @@ import YVault from "../abis/YVault.json";
 	console.log("new gauge set");
 	// Call Earn
 	await vault.earn();
+	await vault.earn();
+	await vault.earn();
 	console.log("earned call");
 })();

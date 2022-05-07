@@ -81,5 +81,8 @@ describe('StrategyBtcCurve', function () {
 
     const strategyPoolBalance = await strategy.balanceOfPool();
     expect(strategyPoolBalance.gt(0)).to.be.true;
+    const oldStrategyPoolBalance = await oldStrategy.balanceOfPool();
+    
+    expect(oldStrategyPoolBalance.eq(0)).to.be.true;
   });
 });
