@@ -8,6 +8,7 @@ import {JsonRpcSigner} from '@ethersproject/providers';
 import Controller from '../abis/Controller.json';
 import YVault from '../abis/YVault.json';
 import ERC20 from '../abis/ERC20.json';
+import ICurveGauge from '../abis/ICurveGauge.json'
 
 const VAULT = '0x953Cf8f1f097c222015FFa32C7B9e3E96993b8c1';
 const CONTROLLER = '0x91aE00aaC6eE0D7853C8F92710B641F68Cd945Df';
@@ -24,6 +25,7 @@ describe('StrategyBtcCurve', function () {
   let controller: Contract;
   let strategy: Contract;
   let oldStrategy: Contract;
+  let crvGauge: Contract;
   let governanceSigner: JsonRpcSigner;
 
   let initialBalance: BigNumber;
@@ -49,7 +51,7 @@ describe('StrategyBtcCurve', function () {
     want = await ethers.getContractAt(ERC20, WANT);
     crv = await ethers.getContractAt(ERC20, CRV);
     oldStrategy = await ethers.getContractAt('StrategyBtcCurve', OLD_STRATEGY);
-
+    crvGauge = await ethers.getContractAt(ICurveGauge,'0x8D9649e50A0d1da8E939f800fB926cdE8f18B47D');
     strategy = await Strategy.deploy(CONTROLLER);
 
     governanceSigner = await ethers.provider.getSigner(GOVERNANCE);
@@ -84,5 +86,9 @@ describe('StrategyBtcCurve', function () {
     const oldStrategyPoolBalance = await oldStrategy.balanceOfPool();
     
     expect(oldStrategyPoolBalance.eq(0)).to.be.true;
+
+    // Testing old gauge award remains
+		expect(await crvGauge.claimable_reward(oldStrategy.address,'0x47536F17F4fF30e64A96a7555826b8f9e66ec468')).to.eq(0)
+		expect(await crvGauge.claimable_reward(oldStrategy.address,'0xB31f66AA3C1e785363F0875A1B74E27b85FD66c7')).to.eq(0)
   });
 });
