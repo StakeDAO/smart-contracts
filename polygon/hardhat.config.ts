@@ -3,11 +3,12 @@ import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-waffle';
 import '@nomiclabs/hardhat-etherscan';
 import 'hardhat-tracer';
+import "hardhat-typechain";
 
-import './tasks/deploy-usd';
-import './tasks/deploy-btc';
-import './tasks/deploy-eur';
-import './tasks/deploy-am-3crv';
+// import './tasks/deploy-usd';
+// import './tasks/deploy-btc';
+// import './tasks/deploy-eur';
+// import './tasks/deploy-am-3crv';
 
 require('dotenv').config();
 
@@ -18,17 +19,17 @@ export default {
   networks: {
     hardhat: {
       forking: {
-        //url: process.env.ALCHEMY_MAINNET
-        url: '<your-rpc-url-to-connect-to-matic-node>'
+        url: process.env.ALCHEMY_MAINNET
+        // url: '<your-rpc-url-to-connect-to-matic-node>'
       }
     },
     mainnet: {
       url: process.env.ALCHEMY_MAINNET,
-      accounts: [`0x${DEPLOYER}`]
+      // accounts: [`0x${DEPLOYER}`]
     },
     matic: {
       url: `<your-rpc-url-to-connect-to-matic-node>`,
-      accounts: [`0x${DEPLOYER}`],
+      // accounts: [`0x${DEPLOYER}`],
       gasPrice: 9000000000
     }
   },
